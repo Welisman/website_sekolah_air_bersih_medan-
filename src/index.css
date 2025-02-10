@@ -1,0 +1,11 @@
+body {
+    background-color: #222;
+    color: #fff;
+}
+
+container mx-auto p-4{
+    text-align: center;
+    padding: 20px;
+    display: block;
+  
+}
