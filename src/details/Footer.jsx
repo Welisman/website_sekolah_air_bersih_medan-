@@ -1,4 +1,4 @@
-import "../../styles/organisms/Footer.css";
+import "../style/Footer.css";
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Dropdown from 'react-bootstrap/Dropdown';

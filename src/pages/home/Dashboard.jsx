@@ -1,5 +1,5 @@
 import React from "react";
-import '../style/Dashboard.css';
+import '../../style/Dashboard.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Nav from 'react-bootstrap/Nav';
@@ -7,9 +7,14 @@ import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
 import { NavDropdown } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
-import LoginButton from "../details/LoginButton";
-import TeksBerjalan from "../details/marque";
-import CarouselBeranda from "../details/carousel";
+import LoginButton from "../../details/LoginButton";
+import TeksBerjalan from "../../details/marque";
+import CarouselBeranda from "../../details/carousel";
+import KataSambutan from "../../details/KataSambutan";
+import Struktur from "../../details/Struktur";
+import VisiMisi from "../../details/VisiMisi";
+import Acara from "../../details/Acara";
+import Footer from "../../details/Footer";
 
 
 
@@ -49,7 +54,6 @@ const Dashboard = () => {
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
-            <TeksBerjalan />
         </header>
     );
 };

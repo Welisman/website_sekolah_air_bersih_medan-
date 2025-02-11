@@ -1,0 +1,14 @@
+
+
+.foto{
+    float: left;
+    margin-top: 5px;
+}
+
+.text {
+    margin: auto;
+    width: 70%;
+    margin-left: auto;
+    margin-top: 10%;
+    height: 500px;
+}

@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import BerandaPage from "../components/pages/BerandaPage.jsx";
+import BerandaPage from "../pages/BerandaPage.jsx";
 import Dashboard from "../pages/Dashboard.jsx";
 
 

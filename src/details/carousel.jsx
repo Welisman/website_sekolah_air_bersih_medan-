@@ -21,14 +21,6 @@ const CarouselBeranda = () => {
                 />
 
             </Carousel.Item>
-            <Carousel.Item>
-                <img
-                    className="d-block w-100"
-                    src={Foto}
-                    alt="Third slide"
-                />
-
-            </Carousel.Item>
         </Carousel>
     )
 }
