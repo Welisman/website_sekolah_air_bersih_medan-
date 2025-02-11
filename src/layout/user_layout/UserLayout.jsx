@@ -1,6 +1,7 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import Dashboard from "../pages/Dashboard"; // Header dan Navbar ada di dalam Dashboard
+import Dashboard from "../../pages/home/Dashboard"; // Header dan Navbar ada di dalam Dashboard
+import Footer from "../../details/Footer";
 
 const UserLayout = () => {
     return (
@@ -12,6 +13,7 @@ const UserLayout = () => {
             <main>
                 <Outlet />
             </main>
+            <Footer />
         </div>
     );
 };

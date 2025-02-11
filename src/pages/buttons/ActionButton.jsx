@@ -1,5 +1,5 @@
 import React from "react";
-import '../style/atoms/ActionButton.css'
+import '../../style/buttons/ActionButton.css'
 
 const ActionButton = ({ type, onClick, textButton, value}) => {
     return (
