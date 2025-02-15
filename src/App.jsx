@@ -1,11 +1,13 @@
 import React from 'react';
 import ErrorBoundary from './error/ErrorBoundary';
-import UserRoutes from './Router/UserRoute';
-
+import AdminRoutes from './Router/admin/AdminRouter';
+import Data from './pages/admin/trafic/traficData';
+import UserRoutes from './Router/user/UserRoute';
 const App = () => {
   return (
     <ErrorBoundary>
-      <UserRoutes />
+      <UserRoutes/>
+      <AdminRoutes/>
       </ErrorBoundary>
   );
 };

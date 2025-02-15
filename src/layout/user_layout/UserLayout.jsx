@@ -1,7 +1,7 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import Dashboard from "../../pages/home/Dashboard"; // Header dan Navbar ada di dalam Dashboard
-import Footer from "../../details/Footer";
+import Dashboard from "../../pages/user/home/Dashboard"; // Header dan Navbar ada di dalam Dashboard
+import Footer from "../../components/user/Footer";
 
 const UserLayout = () => {
     return (

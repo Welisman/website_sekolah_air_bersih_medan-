@@ -1,0 +1,27 @@
+.pengumuman-container {
+    margin-top: 20px;
+  }
+  
+  .pengumuman-card {
+    background-color: #d7d7ff;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    position: relative;
+  }
+  
+  .pengumuman-text {
+    font-weight: bold;
+    font-size: 14px;
+  }
+  
+  .delete-button {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+  }
+  
+  .tambah-button {
+    margin-top: 10px;
+  }
+  

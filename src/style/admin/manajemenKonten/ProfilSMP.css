@@ -1,0 +1,39 @@
+
+.profil-smp-container {
+    padding: 20px;
+}
+
+.profil-smp-card {
+    padding: 20px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    background-color: #ffffff;
+}
+
+.profil-smp-navbar {
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.nav-tabs .nav-link.active {
+    background-color: #007bff;
+    color: white;
+}
+
+.nav-tabs .nav-link {
+    color: #007bff;
+}
+
+.profil-smp-form .form-group {
+    margin-bottom: 1rem;
+}
+
+.profil-smp-form button {
+    margin-top: 10px;
+    padding: 10px 15px;
+    font-size: 16px;
+}
+
+

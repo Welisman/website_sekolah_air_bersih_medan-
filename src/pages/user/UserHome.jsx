@@ -1,9 +1,9 @@
 
 import React from "react";
-import KataSambutan from "../../details/KataSambutan";
-import VisiMisi from "../../details/VisiMisi";
-import Struktur from "../../details/Struktur";
-import CarouselBeranda from "../../details/carousel";
+import KataSambutan from "../../components/user/KataSambutan";
+import VisiMisi from "../../components/user/VisiMisi";
+import Struktur from "../../components/user/Struktur";
+import CarouselBeranda from "../../components/user/carousel";
 
 const UserHome = () => {
     return (
