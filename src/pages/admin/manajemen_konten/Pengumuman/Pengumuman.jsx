@@ -1,24 +1,24 @@
-import React, { useState } from "react";
-import { Container, Nav, Navbar, Button, Card } from "react-bootstrap";
-import "../../../../style/admin/manajemenKonten/Pengumuman.css";
+// src/pages/admin/manajemen_konten/Pengumuman.js
+import React, { useReducer } from "react";
+import { Container, Navbar, Button } from "react-bootstrap";
+import ManajemenNav from "../ManajemenNav";
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "ADD":
+      return [...state, action.payload];
+    case "DELETE":
+      return state.filter((_, i) => i !== action.index);
+    default:
+      return state;
+  }
+};
 
 const Pengumuman = () => {
-  const [pengumumanList, setPengumumanList] = useState([
-    "Video provides a powerful way to help you prove your point. When you click Online Video, you can paste in the embed code for the video you want to add. You can also type a keyword to search online for the video that best fits your document.",
-    "Video provides a powerful way to help you prove your point. When you click Online Video, you can paste in the embed code for the video you want to add. You can also type a keyword to search online for the video that best fits your document.",
+  const [pengumumanList, dispatch] = useReducer(reducer, [
+    "Pengumuman 1",
+    "Pengumuman 2",
   ]);
-
-  const handleDelete = (index) => {
-    const newList = pengumumanList.filter((_, i) => i !== index);
-    setPengumumanList(newList);
-  };
-
-  const handleTambah = () => {
-    setPengumumanList([
-      ...pengumumanList,
-      "Video provides a powerful way to help you prove your point. When you click Online Video, you can paste in the embed code for the video you want to add. You can also type a keyword to search online for the video that best fits your document.",
-    ]);
-  };
 
   return (
     <Container>
@@ -28,39 +28,29 @@ const Pengumuman = () => {
         </Container>
       </Navbar>
 
-      <Nav variant="tabs" defaultActiveKey="Pengumuman">
-                <Nav.Item>
-                    <Nav.Link eventKey="dashboard">Dashboard Utama</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                   <Nav.Link eventKey="profil-smp">Profil SMP</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                    <Nav.Link eventKey="pengumuman"active>Pengumuman</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                    <Nav.Link eventKey="acara-smp">Acara SMP </Nav.Link>
-                </Nav.Item>
-            </Nav>
+      <ManajemenNav />
 
-      <div className="pengumuman-container">
+      <div className="pengumuman-container mt-3">
         {pengumumanList.map((text, index) => (
           <div key={index} className="pengumuman-card">
-            <div>
-              <p className="pengumuman-text">{text}</p>
+            <p className="pengumuman-text">{text}</p>
             <Button
-                variant="danger"
-                className="delete-button"
-                onClick={() => handleDelete(index)}
-              >
-                Delete
-              </Button> 
-            </div>
+              variant="danger"
+              onClick={() => dispatch({ type: "DELETE", index })}
+            >
+              Hapus
+            </Button>
           </div>
         ))}
       </div>
 
-      <Button variant="secondary" className="tambah-button" onClick={handleTambah}>
+      <Button
+        variant="secondary"
+        className="mt-3"
+        onClick={() =>
+          dispatch({ type: "ADD", payload: "Pengumuman baru ditambahkan." })
+        }
+      >
         Tambah Pengumuman
       </Button>
     </Container>

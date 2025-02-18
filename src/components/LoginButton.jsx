@@ -174,7 +174,7 @@ const LoginButton = () => {
                 console.log("Login Success!");
                 localStorage.setItem("token", "dummy_token");
                 localStorage.setItem("username", username);
-                navigate("/admin/dashboard");
+                navigate("/admin");
             } else {
                 alert("Login Gagal! Username atau password salah.");
             }

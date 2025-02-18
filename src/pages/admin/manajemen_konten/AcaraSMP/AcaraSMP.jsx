@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Container, Nav, Navbar, Button, Card, Row, Col } from "react-bootstrap";
 import "../../../../style/admin/manajemenKonten/AcaraSMP.css";
+import ManajemenNav from "../ManajemenNav";
 
 const AcaraSMP= () => {
   const [acaraList, setAcaraList] = useState([
@@ -40,20 +41,7 @@ const AcaraSMP= () => {
         </Container>
       </Navbar>
 
-     <Nav variant="tabs" defaultActiveKey="Acara SMP">
-                     <Nav.Item>
-                         <Nav.Link eventKey="dashboard">Dashboard Utama</Nav.Link>
-                     </Nav.Item>
-                     <Nav.Item>
-                        <Nav.Link eventKey="profil-smp">Profil SMP</Nav.Link>
-                     </Nav.Item>
-                     <Nav.Item>
-                         <Nav.Link eventKey="pengumuman">Pengumuman</Nav.Link>
-                     </Nav.Item>
-                     <Nav.Item>
-                         <Nav.Link eventKey="acara-smp"active>Acara SMP</Nav.Link>
-                     </Nav.Item>
-                 </Nav>
+      <ManajemenNav />
 
       <Row className="mt-4">
         {acaraList.map((acara, index) => (

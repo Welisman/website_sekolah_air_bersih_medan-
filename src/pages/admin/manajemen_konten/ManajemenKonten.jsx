@@ -1,8 +1,9 @@
 import React from 'react';
 import { Container, Form, Button, Row, Col, Navbar, Nav } from 'react-bootstrap';
-import "../../../style/admin/manajemenKonten/ManajemenKonten.css"
-import Foto from "../../../assets/home/image2.png"
-
+import { NavLink } from "react-router-dom";
+import "../../../style/admin/manajemenKonten/ManajemenKonten.css";
+import Foto from "../../../assets/home/image2.png";
+import ManajemenNav from "./ManajemenNav";
 
 const ManajemenKonten = () => {
     return (
@@ -13,20 +14,7 @@ const ManajemenKonten = () => {
                 </Container>
             </Navbar>
 
-            <Nav variant="tabs" defaultActiveKey="Dashboard Utama">
-                <Nav.Item>
-                    <Nav.Link eventKey="dashboard" active>Dashboard Utama</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                   <Nav.Link eventKey="profil-smp">Profil SMP</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                    <Nav.Link eventKey="pengumuman">Pengumuman</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                    <Nav.Link eventKey="acara-smp">Acara SMP </Nav.Link>
-                </Nav.Item>
-            </Nav>
+            <ManajemenNav />
 
             <div className="p-4 shadow-sm">
                 <Form>
@@ -36,8 +24,8 @@ const ManajemenKonten = () => {
                             <Form.Label>Nama :</Form.Label>
                             <Form.Control type="text" defaultValue="H. Sumarno, M.Pd." />
                             <Col>
-                                    <Button variant="primary">Update</Button>
-                                </Col>
+                                <Button variant="primary">Update</Button>
+                            </Col>
                         </Form.Group>
 
                         <Form.Group className="mb-3">

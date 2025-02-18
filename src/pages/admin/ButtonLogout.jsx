@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom"
-import ActionButton from "../buttons/ActionButton";
+import ActionButton from "../user/buttons/ActionButton";
 
 const ButtonLogout = () => {
     const navigate = useNavigate();
