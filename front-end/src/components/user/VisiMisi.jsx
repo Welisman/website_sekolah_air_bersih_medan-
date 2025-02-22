@@ -1,129 +1,48 @@
-import React, { useState, useEffect } from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
-import "../../style/components/VisiMisi.css";
-const response = await axios.get("http://localhost:3001/api/admin/visi");
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { Container } from 'react-bootstrap';
 
-
-const VisiMisiTujuan = () => {
-  const [visi, setVisi] = useState("");
+const VisiMisi = () => {
+  const [visi, setVisi] = useState('');
   const [misi, setMisi] = useState([]);
   const [tujuan, setTujuan] = useState([]);
 
-
-
   useEffect(() => {
-    getVisi();
-    getMisi();
-    getTujuan();
+    fetchData();
   }, []);
 
-
-  const getVisi = async () => {
+  const fetchData = async () => {
     try {
-      const response = await axios.get("http://localhost:5173/api/admin/visi");
-      console.log("Response dari API:", response.data);
-      if (response.data.length > 0) {
-        const data = response.data[0];
-        setVisi(data.visi);
-      }
+      const visiResponse = await axios.get('http://localhost:3001/api/visi');
+      setVisi(visiResponse.data[0]?.visi || 'Tidak ada data visi');
+
+      const misiResponse = await axios.get('http://localhost:3001/api/misi');
+      setMisi(misiResponse.data || []);
+
+      const tujuanResponse = await axios.get('http://localhost:3001/api/tujuan');
+      setTujuan(tujuanResponse.data || []);
     } catch (error) {
-      console.error("Gagal mengambil data:", error);
+      console.error('Error fetching data:', error);
     }
   };
 
-  const getMisi = async () => {
-    try {
-      const response = await axios.get("http://localhost:5173/api/admin/misi")
-      // console.log("Response dari API:", response.data);
-
-      if (Array.isArray(response.data)) {
-        const data = response.data;
-        setMisi(data)
-      } else {
-        setMisi([])
-      }
-
-    } catch (error) {
-      console.log("Gagal Mengambil data :", error)
-      setMisi([])
-    }
-  }
-
-  const getTujuan = async () => {
-    try {
-      const response = await axios.get("http://localhost:5173/api/admin/tujuan")
-      // console.log("Response dari API:", response.data);
-
-      if (Array.isArray(response.data)) {
-        const data = response.data;
-        setTujuan(data)
-      } else {
-        setTujuan([])
-      }
-    } catch (error) {
-      console.log("Gagal Mengambil data :", error)
-      setTujuan([])
-    }
-  }
-
-
   return (
-    <Container className="mt-5">
-      <h1 className="text-center mb-4">Visi, Misi dan Tujuan</h1>
-      <Row className="justify-content-center">
-        <Col md={4} className="mb-4 costum-card">
-          <div className="card shadow">
-            <div className="card-header">
-              <h2 className="card-title text-center">Visi</h2>
-            </div>
-            <div className="card-body costum">
-              <p>{visi ? visi : "Memuat visi..."}</p>
-            </div>
-          </div>
-        </Col>
-        <Col md={4} className="mb-4">
-          <div className="card shadow">
-            <div className="card-header">
-              <h2 className="card-title text-center">Misi</h2>
-            </div>
-            <div className="card-body costum">
-              <ul className="costum-list">
-                {misi?.length > 0 ? ( // Optional Chaining agar tidak error
-                  misi.map((item, index) => (
-                    <li key={index} >
-                      {item.misi}
-                    </li>
-                  ))
-                ) : (
-                  <p>Memuat Misi...</p> // Pesan loading jika data masih kosong
-                )}
-              </ul>
-            </div>
-          </div>
-        </Col>
-        <Col md={4} className="mb-4">
-          <div className="card shadow">
-            <div className="card-header">
-              <h2 className="card-title text-center">Tujuan</h2>
-            </div>
-            <div className="card-body costum">
-              <ul className="costum-list">
-                {tujuan?.length > 0 ? ( // Optional Chaining agar tidak error
-                  tujuan.map((item, index) => (
-                    <li key={index} >
-                      {item.tujuan}
-                    </li>
-                  ))
-                ) : (
-                  <p>Memuat Tujuan...</p> // Pesan loading jika data masih kosong
-                )}
-              </ul>
-            </div>
-          </div>
-        </Col>
-      </Row>
+    <Container>
+      <h2>Visi, Misi & Tujuan</h2>
+      <div>
+        <h3>Visi</h3>
+        <p>{visi}</p>
+      </div>
+      <div>
+        <h3>Misi</h3>
+        <ul>{misi.map((item, index) => <li key={index}>{item.misi}</li>)}</ul>
+      </div>
+      <div>
+        <h3>Tujuan</h3>
+        <ul>{tujuan.map((item, index) => <li key={index}>{item.tujuan}</li>)}</ul>
+      </div>
     </Container>
   );
 };
 
-export default VisiMisiTujuan;
+export default VisiMisi;

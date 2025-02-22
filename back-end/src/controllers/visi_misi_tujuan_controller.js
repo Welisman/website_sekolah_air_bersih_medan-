@@ -3,14 +3,16 @@ const pool = require("../database/database_connection");
 //VISI
 const getVisi = async (req, res) => {
     try {
-        const [rows] = await pool.execute(
-            "SELECT visi FROM visi"
-        );
-        res.json(rows);
-    } catch (error) {
-        res.status(500).json({ error: error.message })
-    }
+        const [rows] = await pool.execute("SELECT visi FROM visi");
 
+        if (rows.length === 0) {
+            return res.status(404).json({ message: "Data visi tidak ditemukan!" });
+        }
+
+        res.json(rows);
+    } catch (error) {   
+        res.status(500).json({ error: error.message });
+    }
 };
 
 const updateVisi = async (req, res) => {

@@ -1,28 +1,18 @@
 
-// const fs = require('fs');
-// const xlsx = require('xlsx');
-// const adminRoutes = require("./routes/admin_route.js");
-const express = require("express");
-const app = express();
-const bodyParser = require('body-parser');
-const cors = require("cors");
-const adminRoutes = require("./src/routes/admin_route");
 require('dotenv').config();
-const PORT = process.env.PORT;
+const express = require('express');
+const cors = require('cors');
+const bodyParser = require('body-parser');
+const pool = require('./src/database/database_connection');
 
-const kataSambutanRoutes = require("./src/routes/kata_sambutan_route");
+const adminRoutes = require('./src/routes/admin_route');
+const kataSambutanRoutes = require('./src/routes/kata_sambutan_route');
+const uploadFotoRoutes = require('./src/routes/upload_foto');
+const visiRoutes = require('./src/routes/visi_misi_route');
 
+const app = express();
+const PORT = process.env.PORT || 3001;
 
+app.use(cors({ origin: 'http://localhost:5173' }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use("/api/kata-sambutan", kataSambutanRoutes);
-
-app.use(cors({
-    origin: "http://localhost:5173",
-}))
-
-app.use('/admin', adminRoutes)
-
-app.listen(PORT, () => {
-    console.log(`Server berjalan pada http://localhost:${PORT}`)
-})
