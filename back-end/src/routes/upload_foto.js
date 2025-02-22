@@ -1,22 +1,28 @@
-const express = require("express");
-const db = require("../database/database_connection");
-
+const express = require('express');
+const multer = require('multer');
+const pool = require('../database/database_connection'); // Pastikan path ini benar
 const router = express.Router();
 
-// Endpoint untuk mengambil foto terbaru dari database
-router.get("/foto", async (req, res) => {
+// Konfigurasi multer untuk menyimpan file di memori
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
+
+// Endpoint untuk mengunggah foto kepala sekolah
+router.post('/upload-foto', upload.single('foto'), async (req, res) => {
     try {
-        const [rows] = await db.execute("SELECT foto FROM foto_kepsek ORDER BY id DESC LIMIT 1");
-        
-        if (rows.length === 0) {
-            return res.status(404).json({ error: "Foto tidak ditemukan" });
+        const { nama } = req.body;
+        if (!req.file) {
+            return res.status(400).json({ error: 'Foto harus diunggah!' });
         }
 
-        res.set("Content-Type", "image/jpeg");
-        res.send(rows[0].foto);
-    } catch (err) {
-        console.error("Error mengambil foto:", err);
-        res.status(500).json({ error: err.message });
+        const foto = req.file.buffer;
+
+        await pool.execute('INSERT INTO foto_kepsek (nama, foto) VALUES (?, ?)', [nama, foto]);
+
+        res.status(201).json({ message: 'Foto berhasil diunggah!' });
+    } catch (error) {
+        console.error('Gagal mengunggah foto:', error);
+        res.status(500).json({ error: 'Terjadi kesalahan pada server' });
     }
 });
 

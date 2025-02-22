@@ -1,48 +1,54 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { Container } from 'react-bootstrap';
+import React, { useEffect, useState } from "react";
+import { Container, Row, Col, ListGroup } from "react-bootstrap";
+import axios from "axios";
 
 const VisiMisi = () => {
-  const [visi, setVisi] = useState('');
-  const [misi, setMisi] = useState([]);
-  const [tujuan, setTujuan] = useState([]);
+    const [data, setData] = useState({ visi: "", misi: [], tujuan: "" });
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+    useEffect(() => {
+        axios.get("http://localhost:3001/api/visi-misi")
+            .then(response => setData(response.data))
+            .catch(error => console.error("Gagal memuat data visi-misi:", error));
+    }, []);
 
-  const fetchData = async () => {
-    try {
-      const visiResponse = await axios.get('http://localhost:3001/api/visi');
-      setVisi(visiResponse.data[0]?.visi || 'Tidak ada data visi');
+    return (
+        <Container className="mt-5">
+            <Row>
+                <Col>
+                    <h3 className="text-center text-primary">Visi, Misi, dan Tujuan</h3>
+                </Col>
+            </Row>
 
-      const misiResponse = await axios.get('http://localhost:3001/api/misi');
-      setMisi(misiResponse.data || []);
+            <Row className="mt-4">
+                <Col md={12}>
+                    <h4 className="text-success">Visi</h4>
+                    <p>{data.visi || "Memuat visi..."}</p>
+                </Col>
+            </Row>
 
-      const tujuanResponse = await axios.get('http://localhost:3001/api/tujuan');
-      setTujuan(tujuanResponse.data || []);
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
-  };
+            <Row className="mt-3">
+                <Col md={12}>
+                    <h4 className="text-success">Misi</h4>
+                    {data.misi.length > 0 ? (
+                        <ListGroup variant="flush">
+                            {data.misi.map((item, index) => (
+                                <ListGroup.Item key={index}>✅ {item}</ListGroup.Item>
+                            ))}
+                        </ListGroup>
+                    ) : (
+                        <p>Memuat misi...</p>
+                    )}
+                </Col>
+            </Row>
 
-  return (
-    <Container>
-      <h2>Visi, Misi & Tujuan</h2>
-      <div>
-        <h3>Visi</h3>
-        <p>{visi}</p>
-      </div>
-      <div>
-        <h3>Misi</h3>
-        <ul>{misi.map((item, index) => <li key={index}>{item.misi}</li>)}</ul>
-      </div>
-      <div>
-        <h3>Tujuan</h3>
-        <ul>{tujuan.map((item, index) => <li key={index}>{item.tujuan}</li>)}</ul>
-      </div>
-    </Container>
-  );
+            <Row className="mt-3">
+                <Col md={12}>
+                    <h4 className="text-success">Tujuan</h4>
+                    <p>{data.tujuan || "Memuat tujuan..."}</p>
+                </Col>
+            </Row>
+        </Container>
+    );
 };
 
 export default VisiMisi;
