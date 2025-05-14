@@ -84,7 +84,7 @@ const Footer = () => {
                     <div className="col-md-4">
                         <h5>Unit Lainnya :</h5>
                         <ul className="list-unstyled">
-                            <li>SMP</li>
+                            <li href="">SMP</li>
                             <li>SMA</li>
                             <li>SMK</li>
                         </ul>

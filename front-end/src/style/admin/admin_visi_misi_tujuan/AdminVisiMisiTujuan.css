@@ -3,6 +3,8 @@
     justify-content: space-around;
     align-items: center;
     padding: 20px;
+    /* background-color: aqua; */
+    box-shadow: 10px;
 }
 
 .misi {
@@ -54,4 +56,11 @@ ul {
 .input{
     width: 50px;
    
+}
+
+.container-visi-misi {
+    display: flex;          /* Gunakan flexbox */
+    justify-content: flex-end; /* Geser semua elemen ke kanan */
+    gap: 20px;              /* Beri jarak antar elemen */
+    padding: 10px;          /* Tambahkan padding */
 }

@@ -1,0 +1,13 @@
+.visi-misi-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  
+  .card-header-custom {
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+  }
+  

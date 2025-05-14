@@ -1,44 +1,59 @@
-require('dotenv').config();
-const express = require('express');
-const cors = require('cors');
-const bodyParser = require('body-parser');
-const pool = require('./src/database/database_connection');
-const uploadFotoRoutes = require('./src/routes/upload_foto');
-const visiMisiRoutes = require('./src/routes/visi_misi_route');
+require("dotenv").config();
+const express = require("express");
+const cors = require("cors");
+const bodyParser = require("body-parser");
+const path = require("path");
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-app.use(cors({ origin: 'http://localhost:5173' }));
+// Database
+const pool = require("./src/database/database_connection");
+
+// Import semua routes
+const fotoKepsekController = require("./src/routes/smp_router/smp_route")
+const visiMisiRoutes = require("./src/routes/smp_router/visi_misi_route")
+const adminRoutes = require("./src/routes/smp_router/smp_route")
+const fasilitasRoute = require("./src/routes/smp_router/smp_route")
+const strukturRoutes = require("./src/routes/smp_router/smp_route")
+const pengumumanRoutes = require("./src/routes/smp_router/smp_route")
+const eventRoutes = require("./src/routes/smp_router/smp_route")
+const kegiatanRoutes = require("./src/routes/smp_router/smp_route")
+const siswaRoutes = require("./src/routes/smp_router/smp_route")
+const totalSiswaTahunanRoutes = require("./src/routes/smp_router/smp_route")
+const waliKelasRoutes = require("./src/routes/smp_router/smp_route")
+const dataGuruTendikRoutes = require("./src/routes/smp_router/smp_route")
+const kataSambutanRoutes = require("./src/routes/smp_router/smp_route")
+
+// Middleware
+app.use(cors({
+    origin: process.env.API_URL || "http://localhost:5173",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+}));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use('/api', uploadFotoRoutes);
-app.use('/api', visiMisiRoutes);
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-app.get('/api/kata-sambutan', async (req, res) => {
-    try {
-        const [rows] = await pool.execute('SELECT * FROM kata_sambutan');
-        res.json(rows);
-    } catch (error) {
-        console.error('Gagal mengambil data kata sambutan:', error);
-        res.status(500).json({ error: 'Terjadi kesalahan pada server' });
-    }
-});
+// Static folder
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
-app.get('/api/foto', async (req, res) => {
-    try {
-        const [rows] = await pool.execute('SELECT foto FROM foto_kepsek ORDER BY id DESC LIMIT 1');
-        if (rows.length === 0) {
-            return res.status(404).json({ error: 'Foto tidak ditemukan' });
-        }
-        res.set('Content-Type', 'image/jpeg');
-        res.send(rows[0].foto);
-    } catch (error) {
-        console.error('Gagal mengambil foto kepala sekolah:', error);
-        res.status(500).json({ error: 'Terjadi kesalahan pada server' });
-    }
-});
+// Register semua routes
+app.use("/api/admin", adminRoutes);
+app.use("/api", fotoKepsekController);
+app.use("/api", kataSambutanRoutes);
+app.use("/api", visiMisiRoutes);
+app.use("/api", strukturRoutes);
+app.use("/api", pengumumanRoutes);
+app.use("/api", eventRoutes);
+app.use("/api", kegiatanRoutes);
+app.use("/api", siswaRoutes);
+app.use("/api", totalSiswaTahunanRoutes);
+app.use("/api", fasilitasRoute);
+app.use("/api", waliKelasRoutes);
+app.use("/api", dataGuruTendikRoutes);
 
+// Jalankan server
 app.listen(PORT, () => {
-    console.log(`Server berjalan di http://localhost:${PORT}`);
+    console.log(`✅ Server berjalan di http://localhost:${PORT}`);
 });
